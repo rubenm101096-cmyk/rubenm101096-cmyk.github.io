@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Rubén Martínez, a C# and .NET developer who builds games in Unity, Godot and Unreal Engine.">
+<title>Rubén Martínez Portfolio</title>
+<style>
+:root { color-scheme: light; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: big name and intro, featured project with its screenshot, then a registry of projects by engine (Godot, Unity, Unreal) with galleries. */
+:root {
+  --bg: #eceff2;
+  --surface: #f8f9fb;
+  --paper: #ffffff;
+  --fg: #12171f;
+  --muted: #535e6c;
+  --line: #cdd4dc;
+  --accent: #0b7f86;
+  --accent-ink: #ffffff;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151c; --surface: #171e27; --fg: #e9edf2; --muted: #98a3b1; --line: #2a3340;
+    --accent: #3fc4c9; --accent-ink: #08161a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151c; --surface: #171e27; --fg: #e9edf2; --muted: #98a3b1; --line: #2a3340;
+  --accent: #3fc4c9; --accent-ink: #08161a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible, .shot:focus-visible, .lb-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+header { display: flex; flex-direction: column; gap: 20px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 9vw, 96px);
+  line-height: .95; letter-spacing: -.03em; margin: 0; text-wrap: balance;
+}
+.intro { display: flex; flex-direction: column; gap: 14px; max-width: 64ch; }
+.lead { font-size: 19px; color: var(--muted); margin: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px;
+  font-weight: 600; text-decoration: none; border: 1.5px solid var(--fg); color: var(--fg);
+  border-radius: 4px; transition: background .15s, color .15s;
+}
+.btn:hover { background: var(--fg); color: var(--bg); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 24px; }
+main { display: flex; flex-direction: column; gap: 64px; }
+
+.project {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; align-items: center;
+  padding-top: 40px; border-top: 1.5px solid var(--fg);
+}
+.art { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: flex; justify-content: center; }
+.art .shot { max-width: 380px; }
+.info { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-family: var(--font-mono); font-size: 12px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); }
+h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 5vw, 46px); line-height: 1.02; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.info p { margin: 0; max-width: 58ch; }
+dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 20px; font-family: var(--font-mono); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; }
+dt { color: var(--muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+.row-links { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+
+.group { display: flex; flex-direction: column; }
+.group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-top: 1.5px solid var(--fg); padding-top: 14px; }
+.group-head h3 { font-size: clamp(24px, 4vw, 32px); }
+.count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.entries { list-style: none; margin: 0; padding: 0; }
+.entry {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 2fr); gap: 12px 32px;
+  padding: 22px 0; border-bottom: 1px solid var(--line);
+}
+.entry h4 { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.15; letter-spacing: -.01em; margin: 0 0 6px; }
+.entry p { margin: 0; color: var(--muted); max-width: 60ch; }
+.meta { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; font-family: var(--font-mono); font-size: 13px; color: var(--muted); min-width: 0; }
+.pill { font-family: var(--font-mono); font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--line); color: var(--fg); }
+.pill.ok { border-color: var(--accent); color: var(--accent); }
+.go { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: 15px; min-width: 0; }
+
+.shots { grid-column: 1 / -1; display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; }
+.shot { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); cursor: zoom-in; overflow: hidden; }
+.shot img { display: block; width: 100%; height: auto; }
+.shots .shot { aspect-ratio: 16 / 9; }
+.shots .shot img { height: 100%; object-fit: cover; transition: transform .25s; }
+.shots .shot:hover img { transform: scale(1.03); }
+.shots.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.shots.portrait { grid-template-columns: repeat(2, minmax(0, 200px)); }
+.shots.portrait .shot { aspect-ratio: 9 / 16; background: var(--paper); }
+.shots.portrait .shot img { object-fit: contain; }
+
+dialog.lb {
+  border: 0; padding: 0; background: transparent; color: var(--fg);
+  max-width: min(96vw, 1280px); max-height: 94vh; overflow: visible;
+}
+dialog.lb::backdrop { background: rgba(8, 11, 15, .82); }
+.lb-inner { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.lb-inner img { display: block; max-width: 100%; max-height: calc(94vh - 90px); width: auto; height: auto; border-radius: 4px; background: var(--paper); }
+.lb-cap { align-self: stretch; font-size: 14px; color: #e9edf2; }
+.lb-close {
+  min-height: 40px; padding: 0 16px; font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--paper); color: #12171f; border: 0; border-radius: 4px;
+}
+
+footer { border-top: 1px solid var(--line); padding-top: 20px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 760px) {
+  .project { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .entry { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .go { flex-direction: row; flex-wrap: wrap; gap: 4px 20px; }
+  .shots, .shots.five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots.portrait { grid-template-columns: repeat(2, minmax(0, 160px)); }
+  .wrap { gap: 56px; }
+  main { gap: 48px; }
+  body { padding-block: 28px 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn, .shots .shot img { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Software developer · C# · .NET</div>
+    <h1>Rubén Martínez</h1>
+    <div class="intro">
+      <p class="lead">Hi, I’m Rubén, a software developer specializing in C# and .NET, with professional experience in games and gaming-machine software. I’ve worked as a Game Developer and Software Team Lead, designing features, reviewing code and leading a team in an environment with strict technical and certification requirements.</p>
+      <p class="lead">I graduated in Video Game Design and Development from the University of Girona. I enjoy solving complex problems and keeping code clean and maintainable. Outside of work I build my own games in Unity and Godot, and you can see some of them here.</p>
+    </div>
+    <div class="links">
+      <a class="btn primary" href="https://rubenmartinez.itch.io/">Play on itch.io</a>
+      <a class="btn" href="https://github.com/rubenm101096-cmyk">View code on GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="featured">
+      <h2 id="featured">Latest project</h2>
+      <article class="project">
+        <div class="art">
+          <button class="shot" type="button" data-full="img/triangle.webp" data-alt="Project Triangle: a triangular grid with black pieces placed and three new pieces below to choose from." aria-label="Enlarge screenshot of Project Triangle">
+            <img src="img/triangle.webp" width="719" height="630" alt="Project Triangle: a triangular grid with black pieces placed and three new pieces below to choose from.">
+          </button>
+        </div>
+        <div class="info">
+          <div class="tags"><span class="tag">Puzzle</span><span class="tag">Godot</span><span class="tag">GDScript</span><span class="tag">Windows</span></div>
+          <h3>Project Triangle</h3>
+          <p>Draw triangles to empty the shelf until the objects can’t fit anymore. It’s a Godot remake of Triangle, a game I made in Unity after graduating. I rebuilt it to learn Godot and to apply what I had learned about scalability and clean code.</p>
+          <dl>
+            <dt>Repository</dt><dd>ProjectTriangle · 6 commits</dd>
+            <dt>Download</dt><dd>ProjectTriangle.exe · 32 MB</dd>
+          </dl>
+          <div class="row-links">
+            <a href="https://rubenmartinez.itch.io/project-triangle">Play on itch.io</a>
+            <a href="https://github.com/rubenm101096-cmyk/ProjectTriangle">Code on GitHub</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section aria-labelledby="registry">
+      <h2 id="registry">All projects, by engine</h2>
+      <div style="display:flex;flex-direction:column;gap:48px">
+
+        <div class="group">
+          <div class="group-head"><h3>Godot</h3><span class="count">2 projects</span></div>
+          <ul class="entries">
+            <li class="entry">
+              <div><h4>Project Triangle</h4><p>Triangle and shelf puzzle. A remake of Triangle, built to learn Godot.</p></div>
+              <div class="meta"><span>Puzzle · Windows</span><span class="pill ok">Released</span></div>
+              <div class="go"><a href="https://rubenmartinez.itch.io/project-triangle">itch.io</a><a href="https://github.com/rubenm101096-cmyk/ProjectTriangle">GitHub</a></div>
+            </li>
+            <li class="entry">
+              <div><h4>20 Seconds To Mars</h4><p>A game about solving mini-games to reach Mars in time. The code is split into GameController, MiniGames, StateMachine and UserInterface.</p></div>
+              <div class="meta"><span>Mini-games · 5 commits</span></div>
+              <div class="go"><a href="https://github.com/rubenm101096-cmyk/20SecondsToMars">GitHub</a></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <div class="group-head"><h3>Unity</h3><span class="count">4 projects</span></div>
+          <ul class="entries">
+            <li class="entry">
+              <div><h4>Triangle</h4><p>A mobile puzzle arcade game. You get three random objects to place on a triangle grid, and you draw triangles to empty the shelf until the objects no longer fit.</p></div>
+              <div class="meta"><span>Puzzle · Android</span><span class="pill ok">Released</span></div>
+              <div class="go"><a href="https://rubenmartinez.itch.io/triangle">itch.io</a></div>
+              <div class="shots portrait">
+                <button class="shot" type="button" data-full="img/tri-1.webp" data-alt="Triangle on Android: the triangular grid nearly full of black pieces and three pieces available below." aria-label="Enlarge screenshot: game in progress"><img src="img/tri-1.webp" width="576" height="1280" loading="lazy" alt="Triangle on Android: the triangular grid nearly full of black pieces and three pieces available below."></button>
+                <button class="shot" type="button" data-full="img/tri-2.webp" data-alt="Triangle’s Game Over screen with the grid full of pieces." aria-label="Enlarge screenshot: Game Over screen"><img src="img/tri-2.webp" width="576" height="1280" loading="lazy" alt="Triangle’s Game Over screen with the grid full of pieces."></button>
+              </div>
+            </li>
+            <li class="entry">
+              <div><h4>Radiology Department Simulator</h4><p>A serious game that teaches children around 12 how a hospital radiology department works. You send each patient to the right room and solve a mini-game about the process.</p></div>
+              <div class="meta"><span>Educational · Windows</span><span class="pill ok">Released</span></div>
+              <div class="go"><a href="https://rubenmartinez.itch.io/radiology-department-simulator">itch.io</a></div>
+              <div class="shots">
+                <button class="shot" type="button" data-full="img/rds-1.webp" data-alt="Ultrasound room with the scanner and the examination bed." aria-label="Enlarge screenshot: ultrasound room"><img src="img/rds-1.webp" width="1280" height="596" loading="lazy" alt="Ultrasound room with the scanner and the examination bed."></button>
+                <button class="shot" type="button" data-full="img/rds-2.webp" data-alt="Control room desk with a monitor showing CT scan slices." aria-label="Enlarge screenshot: desk with imaging monitor"><img src="img/rds-2.webp" width="1280" height="607" loading="lazy" alt="Control room desk with a monitor showing CT scan slices."></button>
+                <button class="shot" type="button" data-full="img/rds-3.webp" data-alt="Matching mini-game: link MRI, Ultrasounds, CAT, X-Ray and Mammography to their medical images." aria-label="Enlarge screenshot: matching mini-game"><img src="img/rds-3.webp" width="1280" height="564" loading="lazy" alt="Matching mini-game: link MRI, Ultrasounds, CAT, X-Ray and Mammography to their medical images."></button>
+              </div>
+            </li>
+            <li class="entry">
+              <div><h4>Project EM</h4><p>A 2D pixel-art platformer set in feudal Japan. A person with multiple sclerosis sets out on a pilgrimage to a temple at the top of a mountain.</p></div>
+              <div class="meta"><span>Adventure · Windows</span><span class="pill ok">Released</span></div>
+              <div class="go"><a href="https://rubenmartinez.itch.io/project-em">itch.io</a></div>
+              <div class="shots">
+                <button class="shot" type="button" data-full="img/em-1.webp" data-alt="Character in a red kimono in a pixel-art landscape with a blue sky, five hearts of health and a torch." aria-label="Enlarge screenshot: blue sky"><img src="img/em-1.webp" width="1280" height="672" loading="lazy" alt="Character in a red kimono in a pixel-art landscape with a blue sky, five hearts of health and a torch."></button>
+                <button class="shot" type="button" data-full="img/em-2.webp" data-alt="Scene with a red sky, a green energy bar, a lightning bolt with the number 3 and a golden leaf with the number 7." aria-label="Enlarge screenshot: red sky"><img src="img/em-2.webp" width="1280" height="737" loading="lazy" alt="Scene with a red sky, a green energy bar, a lightning bolt with the number 3 and a golden leaf with the number 7."></button>
+                <button class="shot" type="button" data-full="img/em-3.webp" data-alt="Night scene with the character next to a torch, a green bar, hearts and a lightning counter." aria-label="Enlarge screenshot: night scene"><img src="img/em-3.webp" width="817" height="398" loading="lazy" alt="Night scene with the character next to a torch, a green bar, hearts and a lightning counter."></button>
+              </div>
+            </li>
+            <li class="entry">
+              <div><h4>Project Asteroids</h4><p>A short space adventure made by students for a university project, in a low-poly style. You control the tool of an AI called Casiopea, look for useful objects and avoid dying of thirst.</p></div>
+              <div class="meta"><span>Adventure · Windows</span><span>With LluisTP</span><span class="pill">Prototype</span></div>
+              <div class="go"><a href="https://lluistp.itch.io/project-asteroids">itch.io</a></div>
+              <div class="shots five">
+                <button class="shot" type="button" data-full="img/pa-1.webp" data-alt="Low-poly astronaut with a headlamp in a golden mountain range under a starry sky." aria-label="Enlarge screenshot: mountains at night"><img src="img/pa-1.webp" width="1280" height="720" loading="lazy" alt="Low-poly astronaut with a headlamp in a golden mountain range under a starry sky."></button>
+                <button class="shot" type="button" data-full="img/pa-2.webp" data-alt="Bright yellow cracks in the ground in front of a dark rock formation." aria-label="Enlarge screenshot: glowing cracks"><img src="img/pa-2.webp" width="1280" height="720" loading="lazy" alt="Bright yellow cracks in the ground in front of a dark rock formation."></button>
+                <button class="shot" type="button" data-full="img/pa-3.webp" data-alt="An asteroid seen from the surface, with the ship in the foreground." aria-label="Enlarge screenshot: asteroid in the sky"><img src="img/pa-3.webp" width="1280" height="720" loading="lazy" alt="An asteroid seen from the surface, with the ship in the foreground."></button>
+                <button class="shot" type="button" data-full="img/pa-4.webp" data-alt="Dark cave with a purple wall and an opening at the back." aria-label="Enlarge screenshot: purple cave"><img src="img/pa-4.webp" width="1280" height="720" loading="lazy" alt="Dark cave with a purple wall and an opening at the back."></button>
+                <button class="shot" type="button" data-full="img/pa-5.webp" data-alt="Blue ice crystals. Casiopea says they can be collected to quench thirst." aria-label="Enlarge screenshot: ice crystals"><img src="img/pa-5.webp" width="1280" height="720" loading="lazy" alt="Blue ice crystals. Casiopea says they can be collected to quench thirst."></button>
+                <button class="shot" type="button" data-full="img/pa-6.webp" data-alt="Green radioactive crystals. Casiopea warns to keep away." aria-label="Enlarge screenshot: radioactive crystals"><img src="img/pa-6.webp" width="1280" height="720" loading="lazy" alt="Green radioactive crystals. Casiopea warns to keep away."></button>
+                <button class="shot" type="button" data-full="img/pa-7.webp" data-alt="Dark cave tunnel with a pink floor and a bend at the back." aria-label="Enlarge screenshot: cave tunnel"><img src="img/pa-7.webp" width="1280" height="720" loading="lazy" alt="Dark cave tunnel with a pink floor and a bend at the back."></button>
+                <button class="shot" type="button" data-full="img/pa-8.webp" data-alt="Cave with a vault of blue and violet crystals and a green crystal on the left." aria-label="Enlarge screenshot: crystal vault"><img src="img/pa-8.webp" width="1280" height="720" loading="lazy" alt="Cave with a vault of blue and violet crystals and a green crystal on the left."></button>
+                <button class="shot" type="button" data-full="img/pa-9.webp" data-alt="The crashed ship next to a golden canyon, while Casiopea tells you to be useful." aria-label="Enlarge screenshot: ship by the canyon"><img src="img/pa-9.webp" width="1280" height="720" loading="lazy" alt="The crashed ship next to a golden canyon, while Casiopea tells you to be useful."></button>
+                <button class="shot" type="button" data-full="img/pa-10.webp" data-alt="The ship lit up. Casiopea explains that the engine isn’t working and that there are remains of an ancient civilization." aria-label="Enlarge screenshot: the lit-up ship"><img src="img/pa-10.webp" width="1280" height="720" loading="lazy" alt="The ship lit up. Casiopea explains that the engine isn’t working and that there are remains of an ancient civilization."></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <div class="group-head"><h3>Unreal Engine</h3><span class="count">1 project</span></div>
+          <ul class="entries">
+            <li class="entry">
+              <div><h4>Blue Asylum</h4><p>A puzzle game demo made with VR compatibility, for practice.</p></div>
+              <div class="meta"><span>Puzzle · VR · Windows</span><span>With LluisTP and kitoss</span><span class="pill">Prototype</span></div>
+              <div class="go"><a href="https://lluistp.itch.io/blue-asylum">itch.io</a></div>
+              <div class="shots">
+                <button class="shot" type="button" data-full="img/ba-1.webp" data-alt="Spiral staircase in the dark, lit only by a light on the railing." aria-label="Enlarge screenshot: dark staircase"><img src="img/ba-1.webp" width="1280" height="720" loading="lazy" alt="Spiral staircase in the dark, lit only by a light on the railing."></button>
+                <button class="shot" type="button" data-full="img/ba-2.webp" data-alt="Blue dome interior seen from below, with circular galleries and a spiral staircase." aria-label="Enlarge screenshot: dome interior"><img src="img/ba-2.webp" width="1280" height="720" loading="lazy" alt="Blue dome interior seen from below, with circular galleries and a spiral staircase."></button>
+                <button class="shot" type="button" data-full="img/ba-3.webp" data-alt="Gear machine with pipes and three pressure gauges in a blue room." aria-label="Enlarge screenshot: gear machine"><img src="img/ba-3.webp" width="1280" height="720" loading="lazy" alt="Gear machine with pipes and three pressure gauges in a blue room."></button>
+                <button class="shot" type="button" data-full="img/ba-4.webp" data-alt="Circular grilled door with the plate B44, next to a lever and an alcove holding a green gear." aria-label="Enlarge screenshot: circular door B44"><img src="img/ba-4.webp" width="1280" height="720" loading="lazy" alt="Circular grilled door with the plate B44, next to a lever and an alcove holding a green gear."></button>
+                <button class="shot" type="button" data-full="img/ba-5.webp" data-alt="Central hall with a spiral staircase, several floors and numbered circular doors." aria-label="Enlarge screenshot: central hall"><img src="img/ba-5.webp" width="1280" height="720" loading="lazy" alt="Central hall with a spiral staircase, several floors and numbered circular doors."></button>
+                <button class="shot" type="button" data-full="img/ba-6.webp" data-alt="Blue corridor with a tiled floor and a door at the end." aria-label="Enlarge screenshot: corridor"><img src="img/ba-6.webp" width="1280" height="720" loading="lazy" alt="Blue corridor with a tiled floor and a door at the end."></button>
+                <button class="shot" type="button" data-full="img/ba-7.webp" data-alt="Storage room with metal shelves and an orange wheel on the floor, lit by a flashlight." aria-label="Enlarge screenshot: storage room"><img src="img/ba-7.webp" width="1280" height="720" loading="lazy" alt="Storage room with metal shelves and an orange wheel on the floor, lit by a flashlight."></button>
+                <button class="shot" type="button" data-full="img/ba-8.webp" data-alt="Control console with a lever and buttons, and an orange gear on the floor." aria-label="Enlarge screenshot: control console"><img src="img/ba-8.webp" width="1280" height="720" loading="lazy" alt="Control console with a lever and buttons, and an orange gear on the floor."></button>
+                <button class="shot" type="button" data-full="img/ba-9.webp" data-alt="Striped low-poly vehicle with a glass cockpit, held by two railings." aria-label="Enlarge screenshot: striped vehicle"><img src="img/ba-9.webp" width="1280" height="720" loading="lazy" alt="Striped low-poly vehicle with a glass cockpit, held by two railings."></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Rubén Martínez · on itch.io since 2019</span>
+    <span><a href="https://github.com/rubenm101096-cmyk">github.com/rubenm101096-cmyk</a> · <a href="https://rubenmartinez.itch.io/">rubenmartinez.itch.io</a></span>
+  </footer>
+</div>
+
+<dialog class="lb" id="lb" aria-label="Enlarged screenshot">
+  <div class="lb-inner">
+    <button class="lb-close" id="lb-close" type="button">Close</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap" id="lb-cap"></div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById("lb");
+  if (!dlg || typeof dlg.showModal !== "function") return;
+  var img = document.getElementById("lb-img");
+  var cap = document.getElementById("lb-cap");
+  document.querySelectorAll(".shot").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      img.src = btn.getAttribute("data-full");
+      img.alt = btn.getAttribute("data-alt") || "";
+      cap.textContent = btn.getAttribute("data-alt") || "";
+      dlg.showModal();
+    });
+  });
+  document.getElementById("lb-close").addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener("close", function () { img.removeAttribute("src"); });
+})();
+</script>
+</body>
+</html>
